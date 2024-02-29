@@ -1,0 +1,68 @@
+// Java code for a simple website with 3 buttons leading to different HTML templates
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class SimpleWebsite {
+
+    public static void main(String[] args) {
+        // Create a JFrame
+        JFrame frame = new JFrame("Simple Website");
+
+        // Create buttons
+        JButton fruitsButton = new JButton("Fruits");
+        JButton veggiesButton = new JButton("Veggies");
+        JButton healthButton = new JButton("Health Benefits");
+
+        // Set button positions and sizes
+        fruitsButton.setBounds(50, 100, 200, 50);
+        veggiesButton.setBounds(50, 200, 200, 50);
+        healthButton.setBounds(50, 300, 200, 50);
+
+        // Add buttons to the frame
+        frame.add(fruitsButton);
+        frame.add(veggiesButton);
+        frame.add(healthButton);
+
+        // Set frame size and layout
+        frame.setSize(300, 500);
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        // Button actions
+        fruitsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open Fruits HTML template
+                openHTMLTemplate("fruits.html");
+            }
+        });
+
+        veggiesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open Veggies HTML template
+                openHTMLTemplate("veggies.html");
+            }
+        });
+
+        healthButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open Health Benefits HTML template
+                openHTMLTemplate("health.html");
+            }
+        });
+    }
+
+    // Method to open HTML templates in a browser
+    private static void openHTMLTemplate(String templateName) {
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + templateName);
+        } catch (Exception ex) {
+            System.out.println("Error opening HTML template: " + ex.getMessage());
+        }
+    }
+}
